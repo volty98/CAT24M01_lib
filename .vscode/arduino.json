@@ -1,0 +1,6 @@
+{
+    "board": "Seeeduino:samd:seeed_XIAO_m0",
+    "sketch": "CAT24M01_lib.ino",
+    "configuration": "usbstack=arduino,debug=off",
+    "port": "COM3"
+}
