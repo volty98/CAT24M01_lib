@@ -10,10 +10,11 @@
 #include "src/CAT24M01.h"
 
 #define USER_BTN 1 //xiao extender board user button
-//#define ADDR_CAT24M01 0x50 not working. PCF8563 I2C address is 0x51(conflict)
+//#define ADDR_CAT24M01 0x50 //not working. PCF8563 I2C address is 0x51(conflict)
 #define ADDR_CAT24M01 0x52 //A1 pin = HIGH
 
-CAT24M01 eep;
+//CAT24M01 eep(&Wire, ADDR_CAT24M01);//0x52
+CAT24M01 eep(&Wire, CAT24M01::ADDR_LH);
 
 bool isI2C(uint8_t address)
 {
@@ -46,7 +47,6 @@ void setup()
   }
   Serial.write('\n');
 
-  eep.init(ADDR_CAT24M01);
 }
 
 void loop()

@@ -12,19 +12,25 @@
 //101010Y : 0x54, 0x55
 //101011Y : 0x56, 0x57
 
-#define ADDR_DEFAULT 0x50
-
 class CAT24M01
 {
 public:
-    CAT24M01();
-    ~CAT24M01();
+    enum eeprom_address {
+        ADDR_DEFAULT = 0x50,
+        ADDR_LL = 0x50,
+        ADDR_LH = 0x52,
+        ADDR_HL = 0x54,
+        ADDR_HH = 0x56,
+        };
 
     /*
-    * \brief initialize command. must call this function before other function.
-    * \param adr I2C device address (default:0x50)
+    * \brief Constructor and initialize parameters.
+    * \param twowire TwoWire instance address.
+    * \param eeprom_base_address I2C device address of the CAT24M01. (default:0x50 = ADDR_DEFAULT)
     */
-    void init(uint8_t adr = ADDR_DEFAULT);
+    CAT24M01(TwoWire* twowire, uint8_t eeprom_base_address);
+
+    ~CAT24M01();
 
     /*
     * \brief 1 byte read from EEPROM.
@@ -40,5 +46,6 @@ public:
 	void write(uint32_t addr, uint8_t value);
 private:
     uint8_t base_addr;// I2C device address
+    TwoWire* tw;
 };
 #endif
